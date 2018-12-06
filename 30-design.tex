@@ -23,14 +23,14 @@
   n(t,m,\br) = \int f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 либо функцию плотности масс
-\begin{equation}
+\begin{equation}\label{eq:mass_density}
   \rho(t,m,\br) = mn(t,m,\br) = \int mf(t,m,\br,\bv)\,d\bv\;.
 \end{equation}
 Данная функция читается так: $\rho(t,m,\br)$ -- это масса в единичном объеме участка кольца в координате $\br$ во время $t$, при этом 
 масса вещества данного участка кольца равна $m$. Остальные параметры имеют схожий физический смысл.
 
 Первый момент по скорости дает нам функцию плотности импульса
-\begin{equation}
+\begin{equation}\label{eq:momentum_density}
   \rho\bu(t,m,\br)=\int m\bv f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 где $\bu$ -- дает нам среднюю скорость участка кольца. Введем понятие локальной скорости частиц
@@ -40,63 +40,165 @@
 которая показывает скорость (хаотического движения) частиц в системе отсчета движущейся вместе с участком кольца со скоростью $\bu$.
 Таким образом введем понятие \emph{гранулярной температуры} системы, по аналогии с термодинамической температурой как второй момент
 по скорости
-\begin{equation}
+\begin{equation}\label{eq:granular_temperature}
   \frac{D}{2}nT(t,m,\br) = \int\frac{m\bc^2}{2}f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 где $D=3$ -- для трехмерной системы, однако мы будем рассматривать двумерную систему $D=2$.
 Нам также понадобятся и другие моменты по скорости, которые уже являются тензорными величинами. Во первых, это
 тензор \emph{напряжения}:
 \begin{equation}
-  \Pi_{ij}(t,m,\br)=m\int v_iv_jf(t,m,\br,\bv)\,d\bv\;,
+  \Pi_{\ab}(t,m,\br)=m\int v_\alpha v_\beta f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 который можно разделить на две части используя (\ref{eq:local_velocity})
 \begin{equation}
-  \Pi_{ij}(t,m,\br)=\rho u_iu_j+P_{ij}\;.
+  \Pi_{\ab}(t,m,\br)=\rho u_\alpha u_\beta+P_{\ab}\;.
 \end{equation}
 Первая часть является динамической частью тензора напряжения, а вторая часть называется тензором \emph{внутренних напряжений}:
 \begin{equation}
-  P_{ij}(t,m,\br)=m\int c_ic_jf(t,m,\br,\bv)\,d\bv\;.
+  P_{\ab}(t,m,\br)=m\int c_\alpha c_\beta f(t,m,\br,\bv)\,d\bv\;.
 \end{equation}
-Разделяя далее данный тензор на диагональную и безсверточную части, получаем:
+Разделяя далее данный тензор на часть с нулевой сверткой и на диагональную часть, получаем:
 \begin{equation}
-  P_{ij} = \delta_{ji}p_{id}+\pi_{ij}\;,\;\;\;\pi_{ii}=0\;,
+  P_{\ab} = \delta_{\ab}p_{id}+\pi_{\ab}\;,\;\;\;\pi_{\alpha\alpha}=0\;,
 \end{equation}
 где 
 \begin{equation}
   p_{id}=\frac{1}{D}\int m\bc^2f(t,m,\br,\bv)\,d\bv=nT\;,
 \end{equation}
-давление идеального газа. Безсверточная часть тензора $\pi_{ij}$ также называется тензором \emph{вязких напряжений}.
+давление идеального газа. Часть тензора с нулевой сверткой $\pi_{\ab}$ также называется тензором \emph{вязких напряжений}.
 
 Наконец, введем следующий тензор
 \begin{equation}
-  Q_{ijk}=m\int c_ic_jc_kf(t,m,\br,\bv)\,d\bv\;,
+  Q_{\ab\gamma}=m\int c_\alpha c_\beta c_\gamma f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 или точнее его свертку по двум индексам
 \begin{equation}
-  q_i=\bq = \frac{1}{2}Q_{ijj} = \int \frac{m\bc^2}{2}c_if(t,m,\br,\bv)\,d\bv\;,
+  q_\alpha=\bq = \frac{1}{2}Q_{\ab\beta} = \int \frac{m\bc^2}{2}c_\alpha f(t,m,\br,\bv)\,d\bv\;,
 \end{equation}
 который называется вектором \emph{потока тепла}.
 
-\section{Подсистема всякой ерунды}
+Теперь приступим к написанию уравнений переноса для вышеперечисленных макропараметров. Для начала напишем
+уравнение переноса для некоторой обобщенной динамической функции $A(t,m,\br,\bv)$. 
+Умножим данную функцию на уравнение Больцмана (\ref{eq:Boltzmann_general})
+и проинтегрируем по всему пространству скоростей:
+\begin{equation}
+  \int A\frac{\pd f}{\pd t}\,d\bv + \int A\bv\frac{\pd f}{\pd\br}\,d\bv+\int A\bw\frac{\pd f}{\pd\bv} 
+  = \int AI_c(f,f')\,d\bv = \left\langle\frac{\pd A}{\pd t}\right\rangle_c\;,
+\end{equation}
+где правая часть показывает среднее изменение динамической функции по времени за счет столкновений.
+Далее можно написать
+\begin{equation}
+  \int\left(\frac{\pd}{\pd t}(Af)+\frac{\pd}{\pd\br}(Af\bv)+\frac{\pd}{\pd\bv}(Af\bw)-
+  f\left[\frac{\pd A}{\pd t}+\bv\frac{\pd A}{\pd\br}+\bw\frac{\pd A}{\pd\bv}\right]\right)
+  \,d\bv=\left\langle\frac{\pd A}{\pd t}\right\rangle_c\;.
+\end{equation}
+Третий член в данном уравнении можно переписать используя теорему Гаусса
+ \begin{equation}
+   \int\frac{\pd}{\pd\bv}(Af\bw)\,d\bv=\oint Af\bw\cdot d\bm{\sigma} = 0\;.
+ \end{equation}
+Здесь, интегрирование по всему пространству скоростей заменено на интегрирование по контуру вокруг этого пространства, где
+$v\to\pm\infty$. Однако функция распределения $f$ обращается в нуль в этом пределе по своей природе. Таким образом,
+мы видим что этот интеграл исчезает. В конечном итоге у нас остается уравнение переноса в следующем виде:
+\begin{equation}\label{eq:transport_equation_general}
+  \frac{\pd}{\pd t}\int Af\,d\bv+\frac{\pd}{\pd\br}\int Af\bv\,d\bv
+  -\int f\left[\frac{\pd A}{\pd t}+\bv\frac{\pd A}{\pd\bv}+\bw\frac{\pd A}{\pd\bv}\right]\,d\bv
+  =\left\langle\frac{\pd A}{\pd t}\right\rangle_c\;.
+\end{equation}
+Теперь, подставляя вместо $A$ необходимые нам макропараметры системы, мы можем вывести соответствующие уравнения переноса для них.
 
-Культурная вставка dot-файлов через утилиту dot2tex (рис.~\ref{fig:fig02}).
+\section{Перенос массы}
+Заменяя в уравнении (\ref{eq:transport_equation_general}) динамическую функцию на массу, $A(t,m,\br,\bv)=m$, получаем
+\begin{equation}
+  \frac{\pd}{\pd t}\int mf\,d\bv + \frac{\pd}{\pd\br}\int mf\bv\,d\bv = 0\;,
+\end{equation}
+теперь используя (\ref{eq:mass_density}) и (\ref{eq:momentum_density}), получаем уравнение переноса плотности массы,
+или так называемое \emph{уравнение непрерывности}
+\begin{equation}
+  \frac{\pd\rho}{\pd t}+\frac{\pd\rho}{\pd\br}(\rho\bu)=0\;.
+\end{equation}
 
-\begin{figure}
-  \centering
-% [width=0.5\textwidth] --- регулировка ширины картинки
-  \includegraphics{figures/pic01}
-  \caption{Рисунок}
-  \label{fig:fig02}
-\end{figure}
+\section{Перенос импульса}
 
+Теперь вместо динамической функции подставляем импульс частицы 
+$A(t,m,\br,\bv)=m\bv=mv_\alpha$, и получаем:
+\begin{equation}
+  \frac{\pd}{\pd t}\int m\bv f\,d\bv+\frac{\pd}{\pd r_\alpha}\int mfv_\alpha v_\beta\,d\bv-\bw\int mf\,d\bv = 
+  \left\langle\frac{\pd(mv_{\alpha})}{\pd t}\right\rangle_c\;.
+\end{equation}
+Правая часть этого уравнения показывает изменение среднего импульса системы в целом, однако по закону сохранения импульса,
+оно равняется нулю. Подставляя выражения соответствующих макропараметров, получаем:
+\begin{equation}
+  \frac{\pd(\rho\bu)}{\pd t} + \frac{\pd\Pi_{\ab}}{\pd r_\alpha} = \rho\bw\;,
+\end{equation}
+где правая часть $\rho\bw=\bm{F}_{ext}$ -- плотность внешних сил действующих на участок системы. В нашем случае
+внешней силой является гравитационное воздействие планеты, которое записывается как $\bw=-\cfrac{\pd U(r)}{\pd\br}$,
+где $r$ -- расстояние до центра планеты. Теперь разделяя тензор напряжений получаем уравнение переноса импульса
+\begin{equation}
+  \frac{\pd(\rho u_\alpha)}{\pd t} + \frac{\pd}{\pd r_\beta}(\rho u_\alpha u_\beta) = 
+  -\frac{\pd\left(nT\right)}{\pd r_\alpha} - \frac{\pd\pi_{\ab}}{\pd r_\beta} + \rho w_\alpha\;.
+\end{equation}
 
-\subsection{Блок-схема всякой ерунды}
+\section{Перенос энергии}
 
-\subsubsection*{Кстати о заголовках}
+Теперь подставим функцию кинетической энергии $A(t,m,\br,\bv)=\cfrac{m\bv^2}{2}$ и запишем уравнение переноса
+\begin{equation}
+  \begin{split}
+    &\frac{1}{2}\frac{\pd}{\pd t}\int m\left(\bc^2+2c_\alpha u_\alpha + \bu^2\right)f\,d\bv
+    + \frac{1}{2}\frac{\pd}{\pd\br}\int m\left(\bc^2+2c_\alpha u_\alpha + \bu^2\right)v_\beta f\,d\bv-\\
+    &-w_\beta\int mfv_\alpha\frac{\pd v_\alpha}{\pd v_\beta}\,d\bv=\left\langle\frac{\pd}{\pd t}\left(\frac{m\bv^2}{2}\right)\right\rangle_c=
+    -T\xi(t,m,\br,T)\;.\\
+  \end{split}
+\end{equation}
+По причине диссипативной природы гранулярных газов, закон сохранения энергии не выполняется, и соответственно правая часть уравнения показывает
+среднее изменение энергии за счет столкновений. Здесь мы ввели положительную функцию $\xi(t,m,\br,T)$, которая отвечает за скорость
+охлаждения газа. Точный вид этой функции мы выведем позднее. Продвигаясь далее записываем:
+\begin{equation}
+  \begin{split}
+    &\frac{\pd}{\pd t}\int\frac{m\bc^2}{2}f\,d\bv+\frac{\pd}{\pd t}\int\frac{m\bu^2}{2}f\,d\bv+
+    \frac{\pd}{\pd r_\beta}\int\frac{m\bc^2}{2}v_\beta f\,d\bv + \frac{\pd}{\pd r_\beta}\int\frac{m\bu^2}{2}v_\beta f\,d\bv + \\
+    &+\frac{\pd}{\pd r_\beta}\int mc_\alpha u_\alpha v_\beta f\,d\bv = \delta_{\ab}w_\beta\rho u_\alpha - T\xi = u_\alpha\cdot\rho w_\alpha - T\xi\;,
+  \end{split}
+\end{equation}
+где мы использовали условие $\int c_if\,d\bv=0$. Выражая через макропараметры, получаем:
+\begin{equation}
+  \begin{split}
+    &\frac{\pd}{\pd t}\left(\frac{D}{2}nT+\frac{\rho\bu^2}{2}\right)+\frac{\pd}{\pd r_\beta}\int\frac{m\bc^2}{2}(c_\beta+u_\beta)\,d\bv +
+    \frac{\pd}{\pd r_\beta}\int mfu_\alpha c_\alpha(c_\beta+u_\beta)\,d\bv +\\
+    &+\frac{\pd}{\pd r_\beta}\left(\frac{\rho\bu^2}{2}u_\beta\right)=\rho\bw\cdot\bu-T\xi\;,
+  \end{split}
+\end{equation}
+\begin{equation}
+  \begin{split}
+    &\frac{\pd}{\pd t}\left(\frac{D}{2}nT+\frac{\rho\bu^2}{2}\right)+\frac{\pd q_\alpha}{\pd r_\alpha}+
+    \frac{\pd}{\pd r_\alpha}\left(\frac{D}{2}u_\alpha nT\right)+\frac{\pd}{\pd r_\alpha}u_\beta\int mfc_\alpha c_\beta\,d\bv+\\
+    &+\frac{\pd}{\pd r_\alpha}\left(\frac{\rho\bu^2}{2}u_\alpha\right)=\rho\bw\cdot\bu-T\xi\;,
+  \end{split}
+\end{equation}
+и используя выражение для тензора внутренних напряжений, получаем:
+\begin{equation}
+  \frac{\pd}{\pd t}\left(\frac{D}{2}nT+\frac{\rho\bu^2}{2}\right)+
+  \frac{\pd}{\pd r_\alpha}\left(\frac{D}{2}u_\alpha nT+\frac{\rho\bu^2}{2}u_\alpha+\delta_{\ab}u_\beta nT+\pi_{\ab}u_\beta+q_\alpha\right)=
+  \rho\bw\cdot\bu-T\xi\;,
+\end{equation}
+и в итоге получаем уравнение переноса энергии:
+\begin{equation}
+  \frac{\pd}{\pd t}\left(\frac{D}{2}nT+\frac{\rho\bu^2}{2}\right)+
+  \frac{\pd}{\pd r_\alpha}u_\alpha\left(\frac{D+2}{2}nT+\frac{\rho\bu^2}{2}\right)+\frac{\pd}{\pd r_\alpha}(\pi_{\ab}u_\beta)
+  +\frac{\pd q_\alpha}{\pd r_\alpha}=\rho\bw\cdot\bu-T\xi\;.
+\end{equation}
 
-У нас есть и \Code{subsubsection}. Только лучше её не нумеровать.
+\section{Вектор потока тепла и тензор вязких напряжений}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "rpz"
-%%% End:
+Во время вывода уравнений переноса, мы получили два неизвестных нам параметра, а именно $q_\alpha$ -- вектор потока тепла,
+и $\pi_{\ab}$ -- тензор вязких напряжений. Выше, во время гидродинамического перехода, мы ввели некий размер в системе 
+$\ell\ll L$. Если теперь рассмотреть малый параметр $x=\ell/L\ll 1$ вокруг которого разложим все макропараметры в ряд, то
+в нулевом приближении оба параметра $q_\alpha$ и $\pi_{\ab}$ исчезают, так как в этом приближении мы имеем дело с идеальной
+жидкостью. В линейном приближении по этому параметру, получаем $q_\alpha,\,\pi_{\ab}\sim x$, и они получают следующий вид
+\begin{equation}
+  \begin{split}
+    \pi_{\ab} &= -\nu\left(\frac{\pd u_\alpha}{\pd r_\beta}+\frac{\pd u_\beta}{\pd r_\alpha}
+    -\frac{2}{D}\delta_{\ab}\frac{\pd u_\beta}{\pd r_\alpha}\right)\;,\\
+    q_\alpha &= -\lambda\,\mbox{grad}\,T = -\lambda\frac{\pd T}{\pd r_\alpha}\;,
+  \end{split}
+\end{equation}
+где $\nu$ -- коэффициент вязкости и $\lambda$ -- коэффициент теплопроводности.
