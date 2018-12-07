@@ -96,7 +96,7 @@ $\bv$ до $\bv+d\bv$.
 конечно же $\delta\bm{p}_i+\delta\bm{p}_j=0$.
 
 Теперь рассмотрим изменение кинетической энергии после столкновения:
-\begin{equation}
+\begin{equation}\label{eq:delta_E_v}
   \begin{split}
     \delta E_i &= \frac{m_i\bv^{'2}_i}{2}-\frac{m_i\bv^2_i}{2} 
     = -\mu(1+\eps)(\bg\cdot\bn)(\bv_i\cdot\bn)+\frac{\mu^2}{2m_i}(1+\eps)^2(\bg\cdot\bn)^2\;, \\
@@ -159,14 +159,11 @@ $\Delta\psi_i(\bv_i)=\psi_i(\bv'_i)-\psi_i(\bv_i)$, то получим:
 \end{equation}
 Это свойство интеграла столкновения мы будем использовать в дальнейшем при описании эволюции энергии всей системы в целом.
 
-
-
-
 \section{Эволюция энергии системы}
 Для того чтобы оценить изменение энергии всей системы в целом за счет столкновений, возьмем функцию кинетической энергии
 частицы как $\psi_i(\bv_i) = \cfrac{m_i\bv^2_i}{2}$, а вместо $\Delta\psi_i(\bv_i)=\delta E_i$ из уравнения (\ref{eq:delta_E}) и подставим
 в (\ref{eq:collision_integral_dynamic_function}). В итоге получаем:
-\begin{equation}
+\begin{equation}\label{eq:energy_collision_evolution}
   \begin{split}
     \int\frac{m_iv^2_i}{2}I_c(t,m_i,\br,\bv_i)\,d\bv_i &= \int dm_j\eta(m_j)\sigma^{D-1}_{ij}
     \int d\bv_id\bg\int d\bn\Theta(-\bg\cdot\bn)\vert\bg\cdot\bn\vert\times\\
