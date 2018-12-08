@@ -261,7 +261,8 @@ $\ell\ll L$. Если теперь рассмотреть малый парам�
 \begin{equation}
   \begin{split}
     \frac{d}{dt}\langle\psi_i(\bc_i)\rangle &= \int dm_jn_in_jg(m_i,\br)g(m_j,\br)\eta(m_j)
-    \sigma^{D-1}_{ij}\left(\frac{\kp_i\kp_j}{\pi^2}\right)^{D/2}\int d\bc_id\bg\int d\bn\Theta(-\bg\cdot\bn)\vert\bg\cdot\bn\vert\times\\
+    \sigma^{D-1}_{ij}\left(\frac{\kp_i\kp_j}{\pi^2}\right)^{D/2}\times\\
+    &\times\int d\bc_id\bg\int d\bn\Theta(-\bg\cdot\bn)\vert\bg\cdot\bn\vert\times\\
     &\times\exp\left(-(\kp_i+\kp_j)c^2_i-\kp_jg^2+2\kp_jgc_i\cos\gamma\right)\Delta\psi_i(\bg,\bc_i)\;.
   \end{split}
 \end{equation}
@@ -338,7 +339,7 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 Теперь исходный интеграл записывается в виде:
 \begin{equation}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_k\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
     \int dgdc_i g^3c_i\times\\
     &\times\exp(-(\kp_i+\kp_j)c^2_i-\kp_jg^2)\times\\
     &\times\left((1+\eps)\frac{\mu}{m_i}gI_0(R)-\frac{3}{4}\pi u(\br)I_0(R)-2c_iI_1(R)\right)\;,
@@ -347,7 +348,7 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 или в более развернутом виде:
 \begin{equation}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_k\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
     \int_{0}^{\infty}dg\,g^3e^{-\kp_jg^2}\times\\
     &\times\int_{0}^{\infty}dc_i\,c_i\exp\left(-(\kp_i+\kp_j)c^2_i\right)\times\\
     &\times\left\{\left((1+\eps)\frac{\mu}{m_i}g-\frac{3}{4}\pi u(\br)\right)I_0(2\kp_jgc_i)-2c_iI_1(2\kp_jgc_i)\right\}\;.
@@ -387,6 +388,27 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 \begin{equation}
   \begin{split}
     \int_{0}^{\infty}xe^{-px^2}I_0(cx)\,dx &= \frac{1}{2p}\exp\left(\frac{c^2}{4p}\right)\;,\\
-    \int_{0}^{\infty}x^2e^{-px^2}I_1(cx)\,dx &= \frac{c}{(2p)^2}\exp\left(\frac{c^2}{4p}\right)\;,
+    \int_{0}^{\infty}x^2e^{-px^2}I_1(cx)\,dx &= \frac{c}{(2p)^2}\exp\left(\frac{c^2}{4p}\right)\;.
   \end{split}
 \end{equation}
+Подставляя все выражения на места, и имея ввиду табличные интегралы:
+\begin{equation}
+  \begin{split}
+    \int_{0}^{\infty}x^3e^{-ax^2}\,dx &= \frac{1}{2a^2}\;,\\
+    \int_{0}^{\infty}x^4e^{-ax^2}\,dx &= \frac{3}{8a^2}\sqrt{\frac{\pi}{a}}\;,
+  \end{split}
+\end{equation}
+получаем:
+\begin{equation}
+  \begin{split}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{\sqrt{\pi}}{2}\int dm_j\Lambda_{ij}\mu(1+\eps)
+    \frac{\kp_i+\kp_j}{\kp_i\kp_j}\sqrt{\frac{\kp_i+\kp_j}{\kp_i\kp_j}}\left(\frac{1+\eps}{2}\frac{\mu}{m_i}
+    -\frac{\kp_j}{\kp_i+\kp_j}\right)-\\
+    &-\frac{\pi u(\br)}{4}\int dm_j\Lambda_{ij}\mu(1+\eps)\frac{\kp_i+\kp_j}{\kp_i\kp_j}\;,
+  \end{split}
+\end{equation}
+где
+\begin{equation}
+  \Lambda_{ij} = n_in_jg_i(\br)g_j(\br)\eta(m_j)\sigma_{ij}\;.
+\end{equation}
+
