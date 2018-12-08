@@ -232,21 +232,21 @@ $\ell\ll L$. Если теперь рассмотреть малый парам�
 распределения Максвелла. Для простоты мы ограничимся этим приближением, так как его достаточно для описания исследуемых нами эффектов.
 Таким образом, в дальнейшем принимаем:
 \begin{equation}\label{eq:Maxwell_distribution}
-  f(t,m_i,\br,\bv_i) = n_i g(m_i,\br)\left(\frac{m_i}{2\pi T_i}\right)^{D/2}\cdot\exp\left\{-\frac{m_i\left(\bv_i-\bu_i\right)^2}{2T_i}\right\}\;,
+  f(t,m_i,\br,\bv_i) = n_i \left(\frac{m_i}{2\pi T_i}\right)^{D/2}\cdot\exp\left\{-\frac{m_i\left(\bv_i-\bu_i\right)^2}{2T_i}\right\}\;,
 \end{equation}
-где $g(m_i,\br)$ -- распределение Больцмана в центральном гравитационном поле. Пока мы оставим его в данном виде, и вернемся к нему 
-в дальнейшем. Средняя скорость движения $\bu$ в нашем случае является скоростью на кеплеровской орбите, и зависит только от 
+где $n_i$ -- числовая плотность частиц. Средняя скорость движения $\bu$ в нашем случае является скоростью на кеплеровской орбите, 
+и зависит только от 
 расстояния до центра планеты $\br$, и не зависит от массы частицы. Таким образом можно сделать замену переменных:
 \begin{equation}
   \bc_i = \bv_i - \bu(\br)\;,\;\;\;d\bc_i=d\bv_i\;,
 \end{equation}
 и переписать функцию распределения в следующем виде:
 \begin{equation}
-  f(t,m_i,\br,\bc_i) = n_ig(m_i,\br)\left(\frac{\kp_i}{\pi}\right)^{D/2}\cdot\exp\left(-\kp_ic^2_i\right)\;,
+  f(t,m_i,\br,\bc_i) = n_i\left(\frac{\kp_i}{\pi}\right)^{D/2}\cdot\exp\left(-\kp_ic^2_i\right)\;,
 \end{equation}
 где $\kp_i=\cfrac{m_i}{2T_i}$, и далее пишем:
 \begin{equation}
-  f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)=n_in_jg(m_i,\br)g(m_j,\br)\left(\frac{\kp_i\kp_j}{\pi^2}\right)^{D/2}
+  f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)=n_in_j\left(\frac{\kp_i\kp_j}{\pi^2}\right)^{D/2}
   \cdot\exp\left(-\kp_ic^2_i-\kp_jc^2_j\right)\;.
 \end{equation}
  Используя $\bv_i-\bv_j=\bc_i-\bc_j$ и соответственно $\bc_j=\bg-\bc_i$, перепишем выражение под экспонентой в следующем виде:
@@ -260,13 +260,15 @@ $\ell\ll L$. Если теперь рассмотреть малый парам�
 за счет столкновений можно представить с следующем виде:
 \begin{equation}
   \begin{split}
-    \frac{d}{dt}\langle\psi_i(\bc_i)\rangle &= \int dm_jn_in_jg(m_i,\br)g(m_j,\br)\eta(m_j)
+    \frac{d}{dt}\langle\psi_i(\bc_i)\rangle &= \int dm_jn_in_j\eta(m_j)
     \sigma^{D-1}_{ij}\left(\frac{\kp_i\kp_j}{\pi^2}\right)^{D/2}\times\\
     &\times\int d\bc_id\bg\int d\bn\Theta(-\bg\cdot\bn)\vert\bg\cdot\bn\vert\times\\
     &\times\exp\left(-(\kp_i+\kp_j)c^2_i-\kp_jg^2+2\kp_jgc_i\cos\gamma\right)\Delta\psi_i(\bg,\bc_i)\;.
   \end{split}
 \end{equation}
 
+
+\subsection{Анализ диссипации для диска}
 Для дальнейшего анализа, используем то обстоятельство, что кольца Сатурна являют чрезвычайно тонким и плоским образованием.
 При радиальной ширине около $L\sim 66 000$ км, и азимутальной протяженности более полумиллиона километров, имеет толщину 
 порядка нескольких метров. Данный факт делает кольцо Сатурна самым тонким природным образованием в солнечной системе. 
@@ -278,7 +280,7 @@ $\vert\bg\cdot\bn\vert=g\cos\theta$, где $\theta$ меняется между
 $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Подставляя все это в интеграл столкновений, пишем:
 \begin{equation}
   \begin{split}
-    \frac{d}{dt}\langle\psi_i(\bc_i)\rangle &=\frac{n_i\kp_i}{\pi}\int dm_jn_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \frac{d}{dt}\langle\psi_i(\bc_i)\rangle &=\frac{n_i\kp_i}{\pi}\int dm_jn_j\kp_j\eta(m_j)\sigma_{ij}
     \int dgdc_i\int_{-\pi/2}^{\pi/2}d\theta\int_0^{2\pi}d\gamma g^2c_i\cos\theta\times \\
     &\times\exp\left(-(\kp_i+\kp_j)c^2_i-\kp_jg^2+2\kp_jgc_i\cos\gamma\right)\Delta\psi_i(\bg,\bc_i)\;.
   \end{split}
@@ -286,19 +288,17 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 Теперь вместо $\psi_i(\bc_i)$ подставим (\ref{eq:delta_E_v}) и получаем:
 \begin{equation}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{n_i\kp_i}{\pi}\int dm_jn_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{n_i\kp_i}{\pi}\int dm_jn_j\kp_j\eta(m_j)\sigma_{ij}
     \int dgdc_i g^2c_i\exp\left(-(\kp_i+\kp_j)c^2_i-\kp_jg^2\right)\times\\
     &\times\int_{-\pi/2}^{\pi/2}d\theta\cos\theta\int_{0}^{2\pi}d\gamma\exp(2\kp_jgc_i\cos\gamma)\times \\
-    &\times\left(-\mu(1+\eps)gc_i\cos\theta\cos(\gamma-\theta)+\frac{\mu^2}{2m_i}(1+\eps)^2g^2\cos^2\theta-
-    2u(\br)\mu(1+\eps)g\cos\theta\right)\;,
+    &\times\left(-\mu(1+\eps)gc_i\cos\theta\cos(\gamma-\theta)+\frac{\mu^2}{2m_i}(1+\eps)^2g^2\cos^2\theta\right)\;,
   \end{split}
 \end{equation}
 здесь мы использовали $\bc_i\cdot\bn=c_i\cos(\gamma-\theta)$. Рассмотрим отдельно угловые интегралы:
 \begin{equation}
   \begin{split}
     S_{\theta\gamma,1} &= -\mu(1+\eps)gc_i\int_{-\pi/2}^{\pi/2}d\theta\cos^2\theta\int_{0}^{2\pi}d\gamma\cos(\theta-\gamma)\exp(R\cos\gamma)\;,\\
-    S_{\theta\gamma,2} &= \frac{\mu^2g^2}{2m_i}(1+\eps)^2\int_{-\pi/2}^{\pi/2}d\theta\cos^3\theta\int_0^{2\pi}d\gamma\exp(R\cos\gamma)\;, \\
-    S_{\theta\gamma,3} &= -2u(\br)\mu(1+\eps)g\int_{-\pi/2}^{\pi/2}d\theta\cos^2\theta\int_0^{2\pi}d\gamma\exp(R\cos\gamma)\;,
+    S_{\theta\gamma,2} &= \frac{\mu^2g^2}{2m_i}(1+\eps)^2\int_{-\pi/2}^{\pi/2}d\theta\cos^3\theta\int_0^{2\pi}d\gamma\exp(R\cos\gamma)\;,
   \end{split}
 \end{equation}
 где $R=2\kp_jgc_i\geq 0$. Разложим первый интеграл по $\gamma$:
@@ -325,33 +325,31 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 \begin{equation}
   \begin{split}
     S_{\theta\gamma,1} &= -\frac{8}{3}\pi\mu(1+\eps)gc_iI_1(R)\;,\\
-    S_{\theta\gamma,2} &= \frac{4\pi\mu^2g^2}{3m_i}(1+\eps)^2I_0(R)\;,\\
-    S_{\theta\gamma,3} &= -\pi^2u(\br)\mu(1+\eps)gI_0(R)\;,
+    S_{\theta\gamma,2} &= \frac{4\pi\mu^2g^2}{3m_i}(1+\eps)^2I_0(R)\;,
   \end{split}
 \end{equation}
-где интегралы по $\theta$ элементарны:
+где интеграл по $\theta$ элементарен:
 \begin{equation}
-  \begin{split}
-    \int_{-\pi/2}^{\pi/2} \cos^2\theta\,d\theta &= \frac{\pi}{2}\;,\\
+  \begin{split}    
     \int_{-\pi/2}^{\pi/2} \cos^3\theta\,d\theta &= \frac{4}{3}\;.
   \end{split}
 \end{equation}
 Теперь исходный интеграл записывается в виде:
 \begin{equation}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_j\kp_j\eta(m_j)\sigma_{ij}
     \int dgdc_i g^3c_i\times\\
     &\times\exp(-(\kp_i+\kp_j)c^2_i-\kp_jg^2)\times\\
-    &\times\left((1+\eps)\frac{\mu}{m_i}gI_0(R)-\frac{3}{4}\pi u(\br)I_0(R)-2c_iI_1(R)\right)\;,
+    &\times\left((1+\eps)\frac{\mu}{m_i}gI_0(R)-2c_iI_1(R)\right)\;,
   \end{split}
 \end{equation}
 или в более развернутом виде:
 \begin{equation}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_jg_i(\br)g_j(\br)\kp_j\eta(m_j)\sigma_{ij}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{4n_i\kp_i}{3}(1+\eps)\int dm_j\mu n_j\kp_j\eta(m_j)\sigma_{ij}
     \int_{0}^{\infty}dg\,g^3e^{-\kp_jg^2}\times\\
     &\times\int_{0}^{\infty}dc_i\,c_i\exp\left(-(\kp_i+\kp_j)c^2_i\right)\times\\
-    &\times\left\{\left((1+\eps)\frac{\mu}{m_i}g-\frac{3}{4}\pi u(\br)\right)I_0(2\kp_jgc_i)-2c_iI_1(2\kp_jgc_i)\right\}\;.
+    &\times\left\{(1+\eps)\frac{\mu}{m_i}gI_0(2\kp_jgc_i)-2c_iI_1(2\kp_jgc_i)\right\}\;.
   \end{split}
 \end{equation}
 Интегралы по функциям Бесселя могут быть рассчитаны с помощью следующих формул:
@@ -391,24 +389,106 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
     \int_{0}^{\infty}x^2e^{-px^2}I_1(cx)\,dx &= \frac{c}{(2p)^2}\exp\left(\frac{c^2}{4p}\right)\;.
   \end{split}
 \end{equation}
-Подставляя все выражения на места, и имея ввиду табличные интегралы:
-\begin{equation}
-  \begin{split}
-    \int_{0}^{\infty}x^3e^{-ax^2}\,dx &= \frac{1}{2a^2}\;,\\
-    \int_{0}^{\infty}x^4e^{-ax^2}\,dx &= \frac{3}{8a^2}\sqrt{\frac{\pi}{a}}\;,
-  \end{split}
+Подставляя все выражения на места, и имея ввиду табличный интеграл:
+\begin{equation}      
+    \int_{0}^{\infty}x^4e^{-ax^2}\,dx = \frac{3}{8a^2}\sqrt{\frac{\pi}{a}}\;,
 \end{equation}
 получаем:
-\begin{equation}
-  \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \frac{\sqrt{\pi}}{2}\int dm_j\Lambda_{ij}\mu(1+\eps)
+\begin{equation}  
+    \left\langle\frac{dE_i}{dt}\right\rangle_c = \frac{\sqrt{\pi}}{2}\int dm_j\Lambda_{ij}\mu(1+\eps)
     \frac{\kp_i+\kp_j}{\kp_i\kp_j}\sqrt{\frac{\kp_i+\kp_j}{\kp_i\kp_j}}\left(\frac{1+\eps}{2}\frac{\mu}{m_i}
-    -\frac{\kp_j}{\kp_i+\kp_j}\right)-\\
-    &-\frac{\pi u(\br)}{4}\int dm_j\Lambda_{ij}\mu(1+\eps)\frac{\kp_i+\kp_j}{\kp_i\kp_j}\;,
-  \end{split}
+    -\frac{\kp_j}{\kp_i+\kp_j}\right)\;,
 \end{equation}
 где
 \begin{equation}
-  \Lambda_{ij} = n_in_jg_i(\br)g_j(\br)\eta(m_j)\sigma_{ij}\;.
+  \Lambda_{ij} = n_in_j\eta(m_j)\sigma_{ij}\;.
+\end{equation}
+Обозначая $\eta(m_j)dm_j=d\chi_j$ -- количество частиц подсистемы $j$ в элементарном объеме вокруг $\br$, получаем
+\begin{equation}  
+    \left\langle\frac{dE_i}{dt}\right\rangle_c = \frac{\sqrt{\pi}}{2}\cdot n_i(1+\eps)\int d\chi_jn_j \sigma_{ij}\mu_{ij}
+    \frac{\kp_i+\kp_j}{\kp_i\kp_j}\sqrt{\frac{\kp_i+\kp_j}{\kp_i\kp_j}}\left(\frac{1+\eps}{2}\frac{\mu_{ij}}{m_i}
+    -\frac{\kp_j}{\kp_i+\kp_j}\right)\;,    
+\end{equation}
+Продвигаемся далее. Так как:
+\begin{equation}
+  \frac{\kp_j}{\kp_i+\kp_j} = \frac{m_jT_i}{m_iT_j+m_jT_i}\;,
+\end{equation}
+и
+\begin{equation}
+  \mu_{ij}\cdot\frac{\kp_i+\kp_j}{\kp_i\kp_j} = \frac{m_im_j}{m_i+m_j}\frac{\frac{m_i}{2T_i}+\frac{m_j}{2T_j}}{\frac{m_im_j}{4T_iT_j}}=
+  2\cdot\frac{m_iT_j+m_jT_i}{m_i+m_j}\;,
+\end{equation}
+преобразуем выражение под интегралом
+\begin{equation*}
+  \begin{split}
+    S &= \mu_{ij}(1+\eps)\frac{\kp_i+\kp_j}{\kp_i\kp_j}\times\left(\frac{\mu_{ij}(1+\eps)}{2m_i}-\frac{\kp_j}{\kp_i+\kp_j}\right) = \\
+    &= \frac{m_iT_j+m_jT_i}{m_i+m_j}\left(\frac{m_j}{m_i+m_j}(1+\eps)^2-\frac{2(1+\eps)m_jT_i}{m_iT_j+m_jT_i}\right)=\\
+    &= \frac{m_j}{(m_i+m_j)^2}\left((m_iT_j+m_jT_i)(1+\eps)^2-2(1+\eps)(m_i+m_j)T_i\right)=\\
+    &= \frac{m_j}{(m_i+m_j)^2}\left([(1+\eps)^2T_j-2(1+\eps)T_i]m_i+[(1+\eps)^2-2(1+\eps)]m_jT_i\right)=\\
+    &= \frac{m_j}{(m_i+m_j)^2}\left(-\left(1-\eps^2\right)m_jT_i+(1+\eps)[(1+\eps)T_j-2T_i]m_i\right)\;,
+  \end{split}
+\end{equation*}
+далее, имея ввиду что $2=1+\eps+1-\eps$, пишем:
+\begin{equation*}
+  \begin{split}
+    S &= \frac{m_j}{(m_i+m_j)^2}\left(-\left(1-\eps^2\right)m_jT_i+m_i(1+\eps)[(1+\eps)T_j-(1+\eps)T_i-(1-\eps)T_i]\right)=\\
+    &= \frac{m_j}{(m_i+m_j)^2}\left(-\left(1-\eps^2\right)m_jT_i+m_i(1+\eps)^2\left(T_j-T_i\right)-m_i\left(1-\eps^2\right)T_i\right) =\\
+    &= \frac{m_j}{(m_i+m_j)^2}\left(-\left(1-\eps^2\right)(m_i+m_j)T_i+m_i(1+\eps)^2\left(T_j-T_i\right)\right)=\\
+    &= -\left(1-\eps^2\right)\frac{m_j}{m_i+m_j}T_i+(1+\eps)^2\frac{m_im_j}{(m_i+m_j)^2}\left(T_j-T_i\right)\;,
+  \end{split}
+\end{equation*}
+и наконец
+\begin{equation}
+  S = -\left(1-\eps^2\right)\frac{\mu}{m_i}T_i+(1+\eps)^2\frac{\mu^2}{m_im_j}\left(T_j-T_i\right)\;.
+\end{equation}
+Вставляя полученное выражение в исходный интеграл, получаем:
+\begin{equation}\label{eq:cooling_rate_interm}
+  \begin{split}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \sqrt{\frac{\pi}{2}}\cdot n_i\int d\chi_jn_j\sigma_{ij}\frac{\mu}{m_i}
+    \sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\times \\
+    &\times\left(-\left(1-\eps^2\right)T_i+(1+\eps)^2\frac{\mu}{m_j}(T_j-T_i)\right)\;.    
+  \end{split}
 \end{equation}
 
+\subsection{Динамические параметры смеси гранулярных газов}
+Рассмотрим некоторые динамические параметры смеси гранулярных газов, которые будут необходимы нам для дальнейшего анализа.
+Во первых, рассчитаем среднюю скорость столкновений $g=g_{ij}$ для заданной пары подсистем. В общем виде, среднее значение
+двухчастичной функции задается следующим выражением:
+\begin{equation}
+  \begin{split}
+    \langle g_{ij}\rangle &= \frac{\int g_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j}
+    {\int f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j} = \\
+    &= \frac{1}{n_in_j}\int g_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j\;,
+  \end{split}
+\end{equation}
+и принимая во внимание что функцию распределения мы выбрали в виде Максвелловского распределения (\ref{eq:Maxwell_distribution}), и 
+следуя такой же схеме рассуждений как и в предыдущей главе, пишем:
+\begin{equation}
+  \begin{split}
+    \langle g_{ij}\rangle &= \frac{\kp_i\kp_j}{\pi^2}\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_ie^{-(\kp_i+\kp_j)c^2_i}
+    \int_{0}^{2\pi}d\phi\int_{0}^{2\pi}d\gamma\,\exp(2\kp_jgc_i\cos\gamma)=\\
+    &=\frac{2\kp_i\kp_j}{\pi}\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_iI_0(2\kp_jg\cdot c_i)
+    \exp\left(-(\kp_i+\kp_j)c^2_i\right)\;,
+  \end{split}
+\end{equation}
+и в итоге получаем среднюю скорость столкновений для частиц подсистем $i$ и $j$ для двумерного газа:
+\begin{equation}
+  \langle g_{ij}\rangle = \sqrt{\frac{\pi}{2}}\cdot\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;.
+\end{equation}
+Оценим частоту столкновений частицы подсистемы $i$ с частицами подсистемы $j$. Представим что размер частицы $i$ пренебрежимо
+мал, и она движется среди других частиц с размерами $\sigma_{ij}=\sigma_i+\sigma_j$, и плотностью $n_j$. В таком случае частота
+столкновений равна:
+\begin{equation}
+  \omega_{ij} = \sigma_{ij}n_j\langle g_{ij}\rangle=\sqrt{\frac{\pi}{2}}\cdot\sigma_{ij}n_j\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;,
+\end{equation}
+и теперь уравнение (\ref{eq:cooling_rate_interm}) можно переписать как:
+\begin{equation}
+  \left\langle\frac{dE_i}{dt}\right\rangle_c = n_i\int d\chi_j\omega_{ij}\left(-A_{ij}T_i+B_{ij}(T_j-T_i)\right)\;,
+\end{equation}
+где
+\begin{equation}
+  \begin{split}
+    A_{ij} &= \frac{1-\eps^2}{2}\frac{\mu}{m_i}\;,\\
+    B_{ij} &= \frac{(1+\eps)^2}{2}\frac{\mu^2}{m_im_j}\;.
+  \end{split}
+\end{equation}
