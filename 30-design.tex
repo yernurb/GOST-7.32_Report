@@ -114,7 +114,7 @@ $v\to\pm\infty$. Однако функция распределения $f$ об
 теперь используя (\ref{eq:mass_density}) и (\ref{eq:momentum_density}), получаем уравнение переноса плотности массы,
 или так называемое \emph{уравнение непрерывности}
 \begin{equation}
-  \frac{\pd\rho}{\pd t}+\frac{\pd\rho}{\pd\br}(\rho\bu)=0\;.
+  \frac{\pd\rho}{\pd t}+\frac{\pd}{\pd\br}(\rho\bu)=0\;.
 \end{equation}
 
 \subsection{Перенос импульса}
@@ -194,7 +194,7 @@ $A(t,m,\br,\bv)=m\bv=mv_\alpha$, и получаем:
 $\ell\ll L$. Если теперь рассмотреть малый параметр $x=\ell/L\ll 1$ вокруг которого разложим все макропараметры в ряд, то
 в нулевом приближении оба параметра $q_\alpha$ и $\pi_{\ab}$ исчезают, так как в этом приближении мы имеем дело с идеальной
 жидкостью. В линейном приближении по этому параметру, получаем $q_\alpha,\,\pi_{\ab}\sim x$, и они получают следующий вид
-\begin{equation}
+\begin{equation}\label{eq:viscosity_coeff}
   \begin{split}
     \pi_{\ab} &= -\nu\left(\frac{\pd u_\alpha}{\pd r_\beta}+\frac{\pd u_\beta}{\pd r_\alpha}
     -\frac{2}{D}\delta_{\ab}\frac{\pd u_\beta}{\pd r_\alpha}\right)\;,\\
@@ -444,51 +444,133 @@ $d\bc_id\bg=gc_i dg dc_id\theta d\gamma$, где $\gamma\in[0\div 2\pi]$. Под
 Вставляя полученное выражение в исходный интеграл, получаем:
 \begin{equation}\label{eq:cooling_rate_interm}
   \begin{split}
-    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \sqrt{\frac{\pi}{2}}\cdot n_i\int d\chi_jn_j\sigma_{ij}\frac{\mu}{m_i}
+    \left\langle\frac{dE_i}{dt}\right\rangle_c &= \sqrt{\frac{\pi}{2}}\cdot n_i\int d\chi_jn_j\sigma_{ij}
     \sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\times \\
-    &\times\left(-\left(1-\eps^2\right)T_i+(1+\eps)^2\frac{\mu}{m_j}(T_j-T_i)\right)\;.    
+    &\times\left(-\left(1-\eps^2\right)\frac{\mu}{m_i}T_i+(1+\eps)^2\frac{\mu^2}{m_im_j}(T_j-T_i)\right)\;.    
   \end{split}
 \end{equation}
 
-\subsection{Динамические параметры смеси гранулярных газов}
+\subsection{Усредненные по ансамблю динамические параметры смеси гранулярных газов}
 Рассмотрим некоторые динамические параметры смеси гранулярных газов, которые будут необходимы нам для дальнейшего анализа.
-Во первых, рассчитаем среднюю скорость столкновений $g=g_{ij}$ для заданной пары подсистем. В общем виде, среднее значение
+Возьмем некоторую функцию зависящую от двухчастичного распределения $\alpha_{ij}$. В общем виде, среднее значение
 двухчастичной функции задается следующим выражением:
 \begin{equation}
   \begin{split}
-    \langle g_{ij}\rangle &= \frac{\int g_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j}
+    \langle \alpha_{ij}\rangle &= \frac{\int \alpha_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j}
     {\int f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j} = \\
-    &= \frac{1}{n_in_j}\int g_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j\;,
+    &= \frac{1}{n_in_j}\int \alpha_{ij}\cdot f(t,m_i,\br,\bc_i)f(t,m_j,\br,\bc_j)\,d\bc_id\bc_j\;,
   \end{split}
 \end{equation}
 и принимая во внимание что функцию распределения мы выбрали в виде Максвелловского распределения (\ref{eq:Maxwell_distribution}), и 
 следуя такой же схеме рассуждений как и в предыдущей главе, пишем:
 \begin{equation}
   \begin{split}
-    \langle g_{ij}\rangle &= \frac{\kp_i\kp_j}{\pi^2}\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_ie^{-(\kp_i+\kp_j)c^2_i}
+    \langle \alpha_{ij}\rangle &= \frac{\kp_i\kp_j}{\pi^2}\int_{0}^{\infty}dg\,ge^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_i\alpha_{ij}e^{-(\kp_i+\kp_j)c^2_i}
     \int_{0}^{2\pi}d\phi\int_{0}^{2\pi}d\gamma\,\exp(2\kp_jgc_i\cos\gamma)=\\
-    &=\frac{2\kp_i\kp_j}{\pi}\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_iI_0(2\kp_jg\cdot c_i)
+    &=4\kp_i\kp_j\int_{0}^{\infty}dg\,ge^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_i\alpha_{ij}I_0(2\kp_jg\cdot c_i)
     \exp\left(-(\kp_i+\kp_j)c^2_i\right)\;,
   \end{split}
 \end{equation}
+где под $\alpha_{ij}$ мы понимаем некоторую функцию по комбинациям скоростей частиц. Сначала положим $\alpha_{ij}=g_{ij}$, 
 и в итоге получаем среднюю скорость столкновений для частиц подсистем $i$ и $j$ для двумерного газа:
 \begin{equation}
-  \langle g_{ij}\rangle = \sqrt{\frac{\pi}{2}}\cdot\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;.
+    \langle g_{ij}\rangle = 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_i
+    I_0(\lambda\cdot c_i)\exp\left(-pc^2_i\right)\;,
 \end{equation}
+где $p=\kp_i+\kp_j$, $\lambda = 2\kp_j g$. Нам также понадобятся и другие динамические параметры. Это среднее по ансамблю
+квадрата скорости столкновения, которое присутствует в выражениях для энергии в системе.
+\begin{equation}
+  \langle g^2_{ij}\rangle = 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^3e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c_i
+  I_0(\lambda\cdot c_i)\exp\left(-pc^2_i\right)\;.
+\end{equation}
+Также запишем следующую функцию $\alpha_{ij} = \bg_{ij}\cdot\bc_i=g_{ij}c_i\cos\gamma$, и получаем:
+\begin{equation}
+  \langle \bg_{ij}\cdot\bc_i\rangle = 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\int_{0}^{\infty}dc_i\,c^2_i
+  I_1(\lambda\cdot c_i)\exp\left(-pc^2_i\right)\;.
+\end{equation}
+Таким образом:
+\begin{equation}
+  \begin{split}
+    \langle g_{ij}\rangle &= 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\cdot\frac{1}{2p}\exp\left(\frac{\lambda^2}{4p}\right)\;,\\
+    \langle g^2_{ij}\rangle &= 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^3e^{-\kp_jg^2}\cdot\frac{1}{2p}\exp\left(\frac{\lambda^2}{4p}\right)\;,\\
+    \langle \bg_{ij}\cdot\bc_i\rangle &= 4\kp_i\kp_j\int_{0}^{\infty}dg\,g^2e^{-\kp_jg^2}\cdot\frac{\lambda}{4p^2}\exp\left(\frac{\lambda^2}{4p}\right)\;,
+  \end{split}
+\end{equation}
+или
+\begin{equation}
+  \begin{split}
+    \langle g_{ij}\rangle &= 2R\int_{0}^{\infty}dg\,g^2e^{-Rg^2}=\frac{1}{2}\sqrt{\frac{\pi}{R}}\;,\\
+    \langle g^2_{ij}\rangle &= 2R\int_{0}^{\infty}dg\,g^3e^{-Rg^2}=\frac{1}{R}\;,\\
+    \langle \bg_{ij}\cdot\bc_i\rangle &= \frac{2R^2}{\kp_i}\int_{0}^{\infty}dg\,g^3e^{-Rg^2}=\frac{1}{\kp_i}\;,
+  \end{split}
+\end{equation}
+где 
+\begin{equation}
+  R=\frac{\kp_i\kp_j}{\kp_i+\kp_j}=\frac{1}{2}\frac{m_im_j}{m_iT_j+m_jT_i}\;.
+\end{equation}
+В конечном итоге получаем:
+\begin{equation}
+  \begin{split}
+    \langle g_{ij}\rangle &= \sqrt{\frac{\pi}{2}}\cdot\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;,\\
+    \langle g^2_{ij}\rangle &= 2\cdot\frac{m_iT_j+m_jT_i}{m_im_j}\;,\\
+    \langle \bg_{ij}\cdot\bc_i\rangle &= \frac{2T_i}{m_i}\;.
+  \end{split}
+\end{equation}
+
 Оценим частоту столкновений частицы подсистемы $i$ с частицами подсистемы $j$. Представим что размер частицы $i$ пренебрежимо
 мал, и она движется среди других частиц с размерами $\sigma_{ij}=\sigma_i+\sigma_j$, и плотностью $n_j$. В таком случае частота
 столкновений равна:
 \begin{equation}
-  \omega_{ij} = \sigma_{ij}n_j\langle g_{ij}\rangle=\sqrt{\frac{\pi}{2}}\cdot\sigma_{ij}n_j\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;,
+  \omega_{ij} = \sigma_{ij}n_j\langle g_{ij}\rangle=\sqrt{\frac{\pi}{2}}\cdot\sigma_{ij}n_j\sqrt{\frac{m_iT_j+m_jT_i}{m_im_j}}\;.
 \end{equation}
-и теперь уравнение (\ref{eq:cooling_rate_interm}) можно переписать как:
+Теперь посчитаем среднее по ансамблю изменение энергии при столкновениях
+(\ref{eq:delta_E}):
 \begin{equation}
-  \left\langle\frac{dE_i}{dt}\right\rangle_c = n_i\int d\chi_j\omega_{ij}\left(-A_{ij}T_i+B_{ij}(T_j-T_i)\right)\;,
+  \begin{split}
+    \langle\delta E_i\rangle &= -\mu(1+\eps)\langle \bg\cdot\bv_C\rangle-\frac{1-\eps^2}{2}\frac{\mu^2}{m_i}\langle g^2\rangle=\\
+    &=-\frac{\mu^2}{m_j}(1+\eps)\langle \bg\cdot\bc_i\rangle-\frac{\mu^2}{m_i}(1+\eps)\langle \bg\cdot\bc_j\rangle
+    -\frac{1-\eps^2}{2}\frac{\mu^2}{m_i}\langle g^2\rangle = \\
+    &=-\frac{\mu^2}{m_j}(1+\eps)\langle \bg\cdot\bc_i\rangle-\frac{\mu^2}{m_i}(1+\eps)\langle \bg\cdot(\bc_i-\bg)\rangle
+    -\frac{1-\eps^2}{2}\frac{\mu^2}{m_i}\langle g^2\rangle = \\
+    &=-\mu(1+\eps)\langle \bg\cdot\bc_i\rangle+\frac{\mu^2}{m_i}(1+\eps)\langle g^2\rangle
+    -\frac{1-\eps^2}{2}\frac{\mu^2}{m_i}\langle g^2\rangle = \\
+    &=-\mu(1+\eps)\langle \bg\cdot\bc_i\rangle+\frac{\mu^2}{m_i}\frac{(1+\eps)^2}{2}\langle g^2\rangle \;,
+  \end{split}
+\end{equation}
+далее пишем:
+\begin{equation}
+  \begin{split}
+    \langle\delta E_i\rangle &=-\mu(1+\eps)\frac{2T_i}{m_i}+\frac{\mu^2}{m_i}(1+\eps)^2\cdot\frac{m_iT_j+m_jT_i}{m_im_j}=\\
+    &=\frac{\mu}{m_i}(1+\eps)\left((1+\eps)\cdot\frac{m_iT_j+m_jT_i}{m_i+m_j}-2T_i\right)=\\
+    &=\frac{\mu}{m_i}\frac{1+\eps}{m_i+m_j}\left[(1+\eps)m_iT_j+(1+\eps)m_jT_i-2m_iT_i-2m_jT_i\right]=\\
+    &=\frac{\mu}{m_i}\frac{1+\eps}{m_i+m_j}\left[(1+\eps)m_i(T_j-T_i)-(1-\eps)(m_i+m_j)T_i\right]\;,
+  \end{split}
+\end{equation}
+и в итоге получаем:
+\begin{equation}
+  \langle\delta E_i\rangle = -\left(1-\eps^2\right)\frac{\mu}{m_i}T_i+(1+\eps)^2\frac{\mu^2}{m_im_j}(T_j-T_i)\;.
+\end{equation}
+Данное выражение равно выражению под скобкой в уравнении (\ref{eq:cooling_rate_interm}), и в итоге ее можно переписать в
+следующем виде:
+\begin{equation}
+  \left\langle\frac{dE_i}{dt}\right\rangle_c = n_i\int d\chi_j\omega_{ij}\langle\delta E_i\rangle\;.
+\end{equation} 
+Вспомним что скорость изменения энергии системы за счет столкновений мы выразили через функцию охлаждения $\xi(t,m_i,\br,T_i)$, 
+и теперь мы можем написать вид этой функции следующим образом:
+\begin{equation}
+  \left\langle\frac{dE_i}{dt}\right\rangle_c = -T_i\xi(t,m_i,\br,T_i)\;,
+\end{equation} 
+или
+\begin{equation}
+  \xi(t,m_i,\br,T_i)=-\frac{n_i}{T_i}\int d\chi_i\omega_{ij}\left(-A_{ij}T_i+B_{ij}(T_j-T_i)\right)\;,
 \end{equation}
 где
 \begin{equation}
   \begin{split}
-    A_{ij} &= \frac{1-\eps^2}{2}\frac{\mu}{m_i}\;,\\
-    B_{ij} &= \frac{(1+\eps)^2}{2}\frac{\mu^2}{m_im_j}\;.
+    A_{ij} &= \left(1-\eps^2\right)\frac{\mu}{m_i}\;,\\
+    B_{ij} &= (1+\eps)^2\frac{\mu^2}{m_im_j}\;.
   \end{split}
 \end{equation}
+Здесь, параметр $A_{ij}$ показывает скорость охлаждения системы из-за диссипации при столкновениях, 
+параметр $B_{ij}$ показывает скорость обмена энергии между подсистемами $i$ и $j$. Данная часть энергии
+остается в системе, и не диссипирует.
