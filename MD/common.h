@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#define N 30000 // total number of particles: active + passive
+#define N 25000 // total number of particles: active + passive
 #define N_inactive 0 // number of inactive particles
 
 extern double lx, ly, lz;

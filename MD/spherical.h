@@ -52,6 +52,7 @@ public:
 	double r() const { return _r; }
 	double m() const { return _m; }
 	int ptype() const { return _ptype; }
+	int species() const { return _species; }
 	void add_force(const Vector3d & f) { _force += f; }
 	void predict(double dt);
 	void correct(double dt);
@@ -73,14 +74,14 @@ public:
 	void set_A(double Aval) { A = Aval; }
 	void set_nu(double nuval) { nu = nuval; }
 	void set_gamma(double gammaval) { gamma = gammaval; }
-	
+	void set_species(int spec) { _species = spec; }	
 
 private:
 	double _r, _m;
-	double _ptype;
+	int _ptype, _species;
 	double Y,A,nu,gamma;
 	Vector3d rtd0, rtd1, rtd2, rtd3,rtd4;
-	Vector3d _force;
+	Vector3d _force;	
 };
 
 #endif

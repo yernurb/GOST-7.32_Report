@@ -15,23 +15,102 @@ void init_system()
 	particle.resize(no_of_particles);
 	cout << "Filling factor: " << no_of_particles*pi*radii_max*radii_max/(lx*ly) << endl;
 	cout << "Number of particles: " << no_of_particles << endl;
+	unsigned int N1 = 5000, N2 = 10000, N3 = 15000, N4 = 20000;
+	unsigned int E0 = 3000;
 
-	for (unsigned int i=0; i<N; i++)
+	for (unsigned int i=0; i<N1; i++)
 	{
 		particle[i].set_x((lx-x_0)*drand48());
 		particle[i].set_y((ly-y_0)*drand48());
 		particle[i].set_z(0.0);
-		particle[i].set_vx(50*(2*drand48()-1));
-                particle[i].set_vy(50*(2*drand48()-1));
                 particle[i].set_vz(double(0));
                 particle[i].set_r(radii_max);
-                particle[i].set_m(2.0);
                 particle[i].set_Y(1000.0);
                 particle[i].set_A(0.01);
 		particle[i].set_nu(0.25);
                 particle[i].set_ptype(0);
 		particle[i].set_gamma(0.2);
+                particle[i].set_m(2.0);
+		particle[i].set_vx(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vy(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+		particle[i].set_species(0);
 	}
+
+	for (unsigned int i=N1; i<N2; i++)
+	{
+		particle[i].set_x((lx-x_0)*drand48());
+		particle[i].set_y((ly-y_0)*drand48());
+		particle[i].set_z(0.0);
+                particle[i].set_r(radii_max);
+                particle[i].set_Y(1000.0);
+                particle[i].set_A(0.01);
+		particle[i].set_nu(0.25);
+                particle[i].set_ptype(0);
+		particle[i].set_gamma(0.2);
+                particle[i].set_m(5.0);
+		particle[i].set_species(1);
+		particle[i].set_vx(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vy(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vz(double(0));
+	}
+
+	for (unsigned int i=N2; i<N3; i++)
+	{
+		particle[i].set_x((lx-x_0)*drand48());
+		particle[i].set_y((ly-y_0)*drand48());
+		particle[i].set_z(0.0);
+                particle[i].set_vz(double(0));
+                particle[i].set_r(radii_max);
+                particle[i].set_Y(1000.0);
+                particle[i].set_A(0.01);
+		particle[i].set_nu(0.25);
+                particle[i].set_ptype(0);
+		particle[i].set_gamma(0.2);
+                particle[i].set_m(10.0);
+		particle[i].set_vx(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vy(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+		particle[i].set_species(2);
+	}
+
+	for (unsigned int i=N3; i<N4; i++)
+	{
+		particle[i].set_x((lx-x_0)*drand48());
+		particle[i].set_y((ly-y_0)*drand48());
+		particle[i].set_z(0.0);
+                particle[i].set_vz(double(0));
+                particle[i].set_r(radii_max);
+                particle[i].set_Y(1000.0);
+                particle[i].set_A(0.01);
+		particle[i].set_nu(0.25);
+                particle[i].set_ptype(0);
+		particle[i].set_gamma(0.2);
+                particle[i].set_m(20.0);
+		particle[i].set_vx(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vy(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+		particle[i].set_species(3);
+	}
+
+	for (unsigned int i=N4; i<N; i++)
+	{
+		particle[i].set_x((lx-x_0)*drand48());
+		particle[i].set_y((ly-y_0)*drand48());
+		particle[i].set_z(0.0);
+                particle[i].set_vz(double(0));
+                particle[i].set_r(radii_max);
+                particle[i].set_Y(1000.0);
+                particle[i].set_A(0.01);
+		particle[i].set_nu(0.25);
+                particle[i].set_ptype(0);
+		particle[i].set_gamma(0.2);
+                particle[i].set_m(40.0);
+		particle[i].set_vx(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+                particle[i].set_vy(sqrt(2*E0/particle[i].m())*(2*drand48()-1));
+		particle[i].set_species(4);
+	}
+
+
+
+
 
 /*		
 	for (unsigned int i=0; i<100; i++)
