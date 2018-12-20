@@ -24,5 +24,6 @@
         "полидисперсностью",
         "хаффа",
         "энскога"
-    ]
+    ],
+    "python.pythonPath": "/home/yernur/.virtualenvs/scientificpy/bin/python"
 }

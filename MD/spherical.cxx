@@ -21,6 +21,7 @@ void spherical::predict(double dt)
 void spherical::correct(double dt)
 {
 	static Vector3d accel, corr;
+	Vector3d shear;
 	double dtrez = 1/dt;
 	const double coeff0 = double(19)/double(90)*(dt*dt/double(2));
 	const double coeff1 = double(3)/double(4)*(dt/double(2));
@@ -32,6 +33,7 @@ void spherical::correct(double dt)
 	corr = accel-rtd2;
 
 	rtd0 += coeff0*corr;
+	shear.set_x(-1.5*0.0001*(rtd0.y()-1000)); shear.set_y(0.0); shear.set_z(0.0);
 	rtd1 += coeff1*corr;
 	rtd2 = accel;
 	rtd3 += coeff3*corr;

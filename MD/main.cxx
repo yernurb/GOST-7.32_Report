@@ -11,6 +11,7 @@ Vector3d G(0.0,0.0,0.0);
 double lx, ly, lz, x_0, y_0, z_0, radii_max;
 ParticleList particle(N);
 unsigned int no_of_particles; // number of active particles
+unsigned int N1=5000, N2=10000, N3=15000, N4=20000;
 double dvx=0.1,vx,abs_vx,eps;
 double sx,sy,sxy,sxq,sqx,a_val,b_val,GT;
 int cnt;
@@ -35,9 +36,10 @@ const double cos13 =  a2, sin13 = -a1;
 const double cos14 =   b, sin14 =  -b;
 const double cos15 =  a1, sin15 = -a2;
 
-void DrawCircle(GLfloat x, GLfloat y, GLfloat r)
+void DrawCircle(GLfloat x, GLfloat y, GLfloat r, GLfloat red, GLfloat green, GLfloat blue)
 {
         // Drawing a circle with OpenGL functions
+        glColor3f(red, green, blue);
         glBegin(GL_TRIANGLE_FAN);
                 glVertex2f(x+r*cos0 ,y+r*sin0 );
                 glVertex2f(x+r*cos1 ,y+r*sin1 );
@@ -61,32 +63,39 @@ void DrawCircle(GLfloat x, GLfloat y, GLfloat r)
 
 void SetupRC(void)
 {
-        glClearColor(0.0,0.0,0.0,1.0);
+        glClearColor(0.9,0.9,0.9,1.0);
         glDisable(GL_DEPTH_TEST);
 }
 
 void RenderScene(void)
 {
         GLfloat x,y,r;
-
-        glClear(GL_COLOR_BUFFER_BIT);
-        glColor3f(1.0f,0.0f,0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);        
         for (unsigned int i=0; i<N_inactive; i++)
         {
                 x = particle[i].x();
                 y = particle[i].y();
                 r = particle[i].r();
-                DrawCircle(x,y,r);
-        }
-	glColor3f(1.0f,1.0f,1.0f);
+                DrawCircle(x,y,r, 0.0f, 0.0f, 0.0f);                
+        }	
         for (unsigned int i=N_inactive; i<particle.size(); i++)
         {
 		x = particle[i].x();
                	y = particle[i].y();
-	        r = particle[i].r();
-                DrawCircle(x,y,r);
+	        r = particle[i].r();                
+                switch (particle[i].species()) {
+                        case(0): DrawCircle(x,y,r, 0.00f, 0.31f, 0.45f);
+                                break;
+                        case(1): DrawCircle(x,y,r, 0.02f, 0.75f, 0.85f);
+                                break;
+                        case(2): DrawCircle(x,y,r, 0.96f, 0.65f, 0.09f);
+                                break;
+                        case(3): DrawCircle(x,y,r, 0.95f, 0.49f, 0.11f);
+                                break;
+                        case(4): DrawCircle(x,y,r, 0.95f, 0.31f, 0.16f);
+                                break;
+                }                
         }
-
 
         glutSwapBuffers();
 }
@@ -141,13 +150,33 @@ void TimerFunction(int value)
 		particle[1].set_vx(-vx);			
 	}
 */
-	GT = 0.0;
-	for (unsigned int i=0; i<particle.size(); i++){
-		GT += particle[i].kinetic_energy();
+	int GT1 = 0.0;
+	for (unsigned int i=0; i<N1; i++){
+		GT1 += particle[i].kinetic_energy();
 	}
-	GT /= particle.size();
+	GT1 /= particle.size();
+        int GT2 = 0.0;
+	for (unsigned int i=N1; i<N2; i++){
+		GT2 += particle[i].kinetic_energy();
+	}
+	GT2 /= particle.size();
+        int GT3 = 0.0;
+	for (unsigned int i=N2; i<N3; i++){
+		GT3 += particle[i].kinetic_energy();
+	}
+	GT3 /= particle.size();
+        int GT4 = 0.0;
+	for (unsigned int i=N3; i<N4; i++){
+		GT4 += particle[i].kinetic_energy();
+	}
+	GT4 /= particle.size();
+        int GT5 = 0.0;
+	for (unsigned int i=N4; i<particle.size(); i++){
+		GT5 += particle[i].kinetic_energy();
+	}
+	GT5 /= particle.size();
 
-	fenergy << Time <<" "<< GT <<" "<< log(Time) <<" "<< log(GT) << endl;
+	fenergy << Time <<" "<< GT1 <<" "<< GT2 <<" "<< GT3 <<" "<< GT4 <<" "<< GT5 <<" " << endl;
 			
         glutPostRedisplay();
         glutTimerFunc(1,TimerFunction,1);
