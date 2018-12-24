@@ -16,5 +16,5 @@ x5 = data[:, [5]].flatten()
 fig, ax = plt.subplots()
 ax.plot(t, x1, t, x2, t, x3, t, x4, t, x5)
 ax.set(xlabel='time', ylabel='energy', title='Energy evolution')
-
+plt.savefig('energy_evo.png')
 plt.show()
